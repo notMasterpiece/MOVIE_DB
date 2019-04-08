@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', () =>{
   const API_KEY = '8b618207d1de51ee9840b0f8b73d0257';
+  const moviesWrap = document.body.querySelector('#movies');
   const movieWrap = document.body.querySelector('#movie-wrap');
   const recWrap = document.body.querySelector('#recoment-wrap');
   const searchForm = document.body.querySelector('#search-form');
@@ -36,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () =>{
 
 
 
-  movieWrap.addEventListener('click', e => {
+  moviesWrap.addEventListener('click', e => {
     e.preventDefault();
     const target = e.target;
 
@@ -62,6 +63,7 @@ window.addEventListener('DOMContentLoaded', () =>{
               fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`)
                   .then(response => response.json())
                   .then(data => {
+                    recWrap.innerHTML = '';
                     new Movies(data.results, recWrap);
                   })
 
